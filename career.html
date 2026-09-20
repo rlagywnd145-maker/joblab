@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>경력기술서 도우미 | 취업연구소</title>
+<meta name="description" content="근무 경력과 담당 업무, 성과를 입력하면 경력기술서 초안을 무료로 정리해드립니다.">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Arial,"Noto Sans KR",sans-serif;
+  background:#f7f9fc;
+  color:#172033;
+  line-height:1.7;
+}
+
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+
+.container{
+  width:min(900px,calc(100% - 36px));
+  margin:auto;
+}
+
+header{
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid #e8edf5;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.header-inner{
+  min-height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#2563eb;
+  font-size:21px;
+  font-weight:800;
+}
+
+.logo-icon{
+  width:35px;
+  height:35px;
+  border-radius:11px;
+  background:#2563eb;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.home{
+  color:#687386;
+  font-size:14px;
+  font-weight:700;
+}
+
+.page-head{
+  padding:65px 0 35px;
+}
+
+.badge{
+  display:inline-block;
+  padding:7px 12px;
+  background:#eff6ff;
+  color:#2563eb;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+h1{
+  font-size:38px;
+  letter-spacing:-1.5px;
+  margin-bottom:10px;
+}
+
+.page-head p{
+  color:#748095;
+}
+
+.tool-box,
+.result-box{
+  background:white;
+  border:1px solid #e3e9f2;
+  border-radius:24px;
+  padding:32px;
+  box-shadow:0 14px 40px rgba(36,55,84,.07);
+}
+
+.tool-box{margin-bottom:25px}
+
+.form-group{margin-bottom:23px}
+
+.two-column{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+label{
+  display:block;
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:9px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid #dce3ed;
+  background:#fbfcfe;
+  border-radius:12px;
+  padding:14px 15px;
+  outline:none;
+}
+
+textarea{
+  resize:vertical;
+  min-height:120px;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#2563eb;
+  background:white;
+  box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+.help{
+  display:block;
+  margin-top:6px;
+  color:#929bad;
+  font-size:12px;
+}
+
+.generate{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:16px;
+  background:#2563eb;
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.generate:hover{
+  background:#1d4ed8;
+}
+
+.result-box{
+  display:none;
+  margin-bottom:25px;
+}
+
+.result-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.result-head h2{
+  font-size:21px;
+}
+
+.complete{
+  background:#ecfdf5;
+  color:#059669;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.result{
+  padding:22px;
+  background:#f8fafc;
+  border-radius:15px;
+  white-space:pre-wrap;
+  color:#364153;
+}
+
+.copy{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:1px solid #dbe3ee;
+  background:white;
+  border-radius:11px;
+  font-weight:800;
+  cursor:pointer;
+  color:#475569;
+}
+
+.notice{
+  background:#eff6ff;
+  padding:18px 20px;
+  border-radius:15px;
+  color:#53627a;
+  font-size:13px;
+  margin-bottom:60px;
+}
+
+.notice strong{
+  color:#2563eb;
+}
+
+footer{
+  background:#0b1120;
+  color:#8d98aa;
+  padding:38px 0;
+  font-size:13px;
+}
+
+footer strong{
+  display:block;
+  color:white;
+}
+
+@media(max-width:600px){
+  .page-head{padding-top:45px}
+  h1{font-size:31px}
+  .tool-box,.result-box{padding:21px}
+  .two-column{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container header-inner">
+
+<a href="index.html" class="logo">
+<div class="logo-icon">💼</div>
+취업연구소
+</a>
+
+<a href="index.html" class="home">
+← 메인으로
+</a>
+
+</div>
+</header>
+
+<main class="container">
+
+<div class="page-head">
+<div class="badge">FREE JOB TOOL</div>
+
+<h1>경력기술서 도우미</h1>
+
+<p>
+근무했던 회사와 담당 업무, 성과를 입력하면 경력기술서 형태로 정리해드립니다.
+</p>
+</div>
+
+
+<div class="tool-box">
+
+<div class="two-column">
+
+<div class="form-group">
+<label for="company">회사·매장명</label>
+
+<input
+type="text"
+id="company"
+placeholder="예: OO레스토랑">
+</div>
+
+
+<div class="form-group">
+<label for="job">직무</label>
+
+<input
+type="text"
+id="job"
+placeholder="예: 홀 서비스">
+</div>
+
+</div>
+
+
+<div class="two-column">
+
+<div class="form-group">
+<label for="start">근무 시작</label>
+
+<input
+type="month"
+id="start">
+</div>
+
+
+<div class="form-group">
+<label for="end">근무 종료</label>
+
+<input
+type="month"
+id="end">
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="work">
+주요 담당 업무
+</label>
+
+<textarea
+id="work"
+placeholder="예: 고객 안내, 주문 응대, 테이블 관리, 매장 오픈 및 마감, 고객 불편사항 대응 등을 담당했습니다."></textarea>
+
+<span class="help">
+실제로 했던 일을 편하게 적어주세요.
+</span>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="achievement">
+성과 또는 잘했던 점
+</label>
+
+<textarea
+id="achievement"
+placeholder="예: 바쁜 시간대 직원들과 역할을 조율해 매장 운영을 지원했고 신입 직원에게 업무를 교육했습니다."></textarea>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="skill">
+업무를 통해 얻은 역량
+</label>
+
+<input
+type="text"
+id="skill"
+placeholder="예: 고객응대, 문제해결, 협업, 매장운영">
+
+</div>
+
+
+<button class="generate" onclick="generateCareer()">
+경력기술서 만들기 →
+</button>
+
+</div>
+
+
+<div class="result-box" id="resultBox">
+
+<div class="result-head">
+
+<h2>경력기술서 초안</h2>
+
+<div class="complete">
+완성
+</div>
+
+</div>
+
+<div class="result" id="result"></div>
+
+<button class="copy" onclick="copyResult()">
+결과 복사하기
+</button>
+
+</div>
+
+
+<div class="notice">
+<strong>TIP.</strong>
+단순히 담당 업무만 나열하기보다 실제로 개선한 점이나 성과를 함께 작성하면
+더 좋은 경력기술서를 만들 수 있습니다.
+</div>
+
+</main>
+
+
+<footer>
+<div class="container">
+<strong>취업연구소</strong>
+취업 준비를 조금 더 쉽고 간단하게.
+</div>
+</footer>
+
+
+<script>
+
+function formatMonth(value){
+
+  if(!value) return "";
+
+  const parts = value.split("-");
+
+  return `${parts[0]}.${parts[1]}`;
+
+}
+
+
+function generateCareer(){
+
+  const company =
+    document.getElementById("company").value.trim();
+
+  const job =
+    document.getElementById("job").value.trim();
+
+  const start =
+    document.getElementById("start").value;
+
+  const end =
+    document.getElementById("end").value;
+
+  const work =
+    document.getElementById("work").value.trim();
+
+  const achievement =
+    document.getElementById("achievement").value.trim();
+
+  const skill =
+    document.getElementById("skill").value.trim();
+
+
+  if(!company){
+    alert("회사 또는 매장명을 입력해주세요.");
+    return;
+  }
+
+  if(!job){
+    alert("직무를 입력해주세요.");
+    return;
+  }
+
+  if(!work){
+    alert("주요 담당 업무를 입력해주세요.");
+    return;
+  }
+
+
+  let period = "";
+
+  if(start && end){
+    period = `${formatMonth(start)} ~ ${formatMonth(end)}`;
+  }
+
+  else if(start){
+    period = `${formatMonth(start)} ~ 현재`;
+  }
+
+
+  let text =
+`[${company}]
+
+직무
+${job}
+
+${period ? `근무기간
+${period}
+
+` : ""}주요 담당 업무
+${work}
+
+${achievement ? `주요 경험 및 성과
+${achievement}
+
+` : ""}${skill ? `보유 역량
+${skill}
+
+` : ""}업무를 수행하며 상황에 맞게 우선순위를 판단하고 맡은 역할을 책임감 있게 수행했습니다. 또한 원활한 업무 진행을 위해 동료들과 적극적으로 소통하고 협업하며 안정적인 업무 운영에 기여했습니다.`;
+
+
+  document.getElementById("result").textContent = text;
+
+  const box =
+    document.getElementById("resultBox");
+
+  box.style.display = "block";
+
+  box.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+function copyResult(){
+
+  const text =
+    document.getElementById("result").innerText;
+
+  navigator.clipboard.writeText(text)
+  .then(()=>{
+    alert("경력기술서가 복사되었습니다.");
+  })
+  .catch(()=>{
+    alert("복사에 실패했습니다. 직접 선택해서 복사해주세요.");
+  });
+
+}
+
+</script>
+
+</body>
+</html>
