@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>면접 예상질문 생성기 | 취업연구소</title>
+<meta name="description" content="지원 직무와 경력에 맞는 면접 예상질문을 무료로 생성해보세요.">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Arial,"Noto Sans KR",sans-serif;
+  background:#f7f9fc;
+  color:#172033;
+  line-height:1.7;
+}
+
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+
+.container{
+  width:min(900px,calc(100% - 36px));
+  margin:auto;
+}
+
+header{
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid #e8edf5;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.header-inner{
+  min-height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#2563eb;
+  font-size:21px;
+  font-weight:800;
+}
+
+.logo-icon{
+  width:35px;
+  height:35px;
+  border-radius:11px;
+  background:#2563eb;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.home{
+  color:#687386;
+  font-size:14px;
+  font-weight:700;
+}
+
+.page-head{
+  padding:65px 0 35px;
+}
+
+.badge{
+  display:inline-block;
+  padding:7px 12px;
+  background:#eff6ff;
+  color:#2563eb;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+h1{
+  font-size:38px;
+  letter-spacing:-1.5px;
+  margin-bottom:10px;
+}
+
+.page-head p{
+  color:#748095;
+}
+
+.tool-box,
+.result-box{
+  background:white;
+  border:1px solid #e3e9f2;
+  border-radius:24px;
+  padding:32px;
+  box-shadow:0 14px 40px rgba(36,55,84,.07);
+}
+
+.tool-box{
+  margin-bottom:25px;
+}
+
+.form-group{
+  margin-bottom:23px;
+}
+
+label{
+  display:block;
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:9px;
+}
+
+input,
+select{
+  width:100%;
+  border:1px solid #dce3ed;
+  background:#fbfcfe;
+  border-radius:12px;
+  padding:14px 15px;
+  outline:none;
+}
+
+input:focus,
+select:focus{
+  border-color:#2563eb;
+  background:white;
+  box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+.generate{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:16px;
+  background:#2563eb;
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.generate:hover{
+  background:#1d4ed8;
+}
+
+.result-box{
+  display:none;
+  margin-bottom:25px;
+}
+
+.result-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.result-title h2{
+  font-size:21px;
+}
+
+.complete{
+  background:#ecfdf5;
+  color:#059669;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.question{
+  background:#f8fafc;
+  border:1px solid #edf1f6;
+  border-radius:16px;
+  padding:19px;
+  margin-bottom:13px;
+}
+
+.question-number{
+  font-size:11px;
+  color:#2563eb;
+  font-weight:900;
+  margin-bottom:5px;
+}
+
+.question strong{
+  display:block;
+  font-size:15px;
+  margin-bottom:8px;
+}
+
+.tip{
+  font-size:13px;
+  color:#788397;
+}
+
+.tip span{
+  color:#2563eb;
+  font-weight:800;
+}
+
+.copy{
+  width:100%;
+  margin-top:8px;
+  padding:13px;
+  border:1px solid #dbe3ee;
+  background:white;
+  border-radius:11px;
+  font-weight:800;
+  cursor:pointer;
+  color:#475569;
+}
+
+.notice{
+  background:#eff6ff;
+  border-radius:15px;
+  padding:18px 20px;
+  color:#53627a;
+  font-size:13px;
+  margin-bottom:60px;
+}
+
+.notice strong{
+  color:#2563eb;
+}
+
+footer{
+  background:#0b1120;
+  color:#8d98aa;
+  padding:38px 0;
+  font-size:13px;
+}
+
+footer strong{
+  color:white;
+  display:block;
+}
+
+@media(max-width:600px){
+  .page-head{padding-top:45px}
+  h1{font-size:31px}
+  .tool-box,.result-box{padding:21px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container header-inner">
+
+<a href="index.html" class="logo">
+<div class="logo-icon">💼</div>
+취업연구소
+</a>
+
+<a href="index.html" class="home">
+← 메인으로
+</a>
+
+</div>
+</header>
+
+
+<main class="container">
+
+<div class="page-head">
+
+<div class="badge">FREE JOB TOOL</div>
+
+<h1>면접 예상질문 생성기</h1>
+
+<p>
+지원 직무와 경력에 맞춰 면접에서 나올 수 있는 질문을 준비해보세요.
+</p>
+
+</div>
+
+
+<div class="tool-box">
+
+<div class="form-group">
+
+<label for="job">
+지원 직무
+</label>
+
+<input
+type="text"
+id="job"
+placeholder="예: 서비스직, 마케팅, 사무직, 개발자">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="career">
+지원 유형
+</label>
+
+<select id="career">
+<option value="신입">신입</option>
+<option value="경력">경력</option>
+<option value="아르바이트">아르바이트</option>
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="type">
+면접 유형
+</label>
+
+<select id="type">
+<option value="종합">종합 면접</option>
+<option value="인성">인성 중심</option>
+<option value="직무">직무 중심</option>
+<option value="상황">상황·대처 중심</option>
+</select>
+
+</div>
+
+
+<button class="generate" onclick="generateQuestions()">
+예상질문 만들기 →
+</button>
+
+</div>
+
+
+<div class="result-box" id="resultBox">
+
+<div class="result-title">
+
+<h2>예상 면접질문</h2>
+
+<div class="complete">
+10개 생성
+</div>
+
+</div>
+
+<div id="questions"></div>
+
+<button class="copy" onclick="copyQuestions()">
+질문 전체 복사하기
+</button>
+
+</div>
+
+
+<div class="notice">
+<strong>TIP.</strong>
+답변을 외우기보다 질문마다 본인의 실제 경험을 하나씩 연결해두면
+실제 면접에서 훨씬 자연스럽게 답변할 수 있습니다.
+</div>
+
+</main>
+
+
+<footer>
+<div class="container">
+<strong>취업연구소</strong>
+취업 준비를 조금 더 쉽고 간단하게.
+</div>
+</footer>
+
+
+<script>
+
+let generatedQuestions = [];
+
+function generateQuestions(){
+
+  const job =
+    document.getElementById("job").value.trim();
+
+  const career =
+    document.getElementById("career").value;
+
+  const type =
+    document.getElementById("type").value;
+
+  if(!job){
+    alert("지원 직무를 입력해주세요.");
+    return;
+  }
+
+  const basic = [
+    {
+      q:`간단하게 자기소개를 해주세요.`,
+      tip:"경력이나 경험을 나열하기보다 지원 직무와 연결되는 강점 중심으로 준비하세요."
+    },
+    {
+      q:`왜 ${job} 직무에 지원하셨나요?`,
+      tip:"관심을 갖게 된 계기와 본인의 경험을 연결하면 좋습니다."
+    },
+    {
+      q:`본인의 가장 큰 강점은 무엇인가요?`,
+      tip:`${job} 업무에서 활용할 수 있는 강점을 실제 경험과 함께 설명하세요.`
+    },
+    {
+      q:`본인의 단점과 이를 보완하기 위해 노력한 경험이 있나요?`,
+      tip:"치명적인 단점보다는 개선 과정과 현재의 노력을 중심으로 답변하세요."
+    }
+  ];
+
+  const jobQuestions = [
+    {
+      q:`${job} 업무에서 가장 중요하다고 생각하는 역량은 무엇인가요?`,
+      tip:"왜 그 역량이 중요한지 실제 업무 상황을 예로 들어 설명해보세요."
+    },
+    {
+      q:`${job} 업무를 수행하면서 어려운 상황이 발생한다면 어떻게 대처하시겠습니까?`,
+      tip:"상황 파악 → 우선순위 판단 → 행동 → 결과 순서로 준비하세요."
+    },
+    {
+      q:`본인의 경험 중 ${job} 직무에 가장 도움이 될 경험은 무엇인가요?`,
+      tip:"경험 자체보다 그 경험에서 배운 점을 직무와 연결하세요."
+    },
+    {
+      q:`${job} 직무에서 본인이 다른 지원자보다 잘할 수 있는 부분은 무엇인가요?`,
+      tip:"막연한 자신감보다는 구체적인 경험이나 습관을 근거로 답변하세요."
+    }
+  ];
+
+  const personality = [
+    {
+      q:"동료와 의견이 맞지 않았던 경험이 있나요? 어떻게 해결했나요?",
+      tip:"갈등의 원인보다 소통하고 해결한 과정을 중심으로 이야기하세요."
+    },
+    {
+      q:"업무 중 실수했던 경험과 그 이후 어떻게 대처했는지 말씀해주세요.",
+      tip:"실수를 숨기기보다 인정 → 해결 → 재발 방지 과정을 보여주세요."
+    },
+    {
+      q:"스트레스를 받는 상황에서는 어떻게 관리하시나요?",
+      tip:"실제 본인이 사용하는 건강하고 현실적인 방법을 설명하세요."
+    },
+    {
+      q:"주변 사람들은 본인을 어떤 사람이라고 평가하나요?",
+      tip:"직무에 도움이 되는 성향과 이를 보여주는 짧은 사례를 준비하세요."
+    }
+  ];
+
+  const situation = [
+    {
+      q:`${job} 업무 중 여러 가지 일이 동시에 발생한다면 어떤 기준으로 우선순위를 정하시겠습니까?`,
+      tip:"긴급성, 중요도, 고객 또는 조직에 미치는 영향을 기준으로 설명하세요."
+    },
+    {
+      q:"고객이나 동료가 강하게 불만을 제기한다면 어떻게 대응하시겠습니까?",
+      tip:"경청 → 상황 확인 → 해결 가능한 조치 → 필요 시 보고 순서가 좋습니다."
+    },
+    {
+      q:"본인이 모르는 업무를 갑자기 맡게 된다면 어떻게 하시겠습니까?",
+      tip:"확인, 질문, 학습, 실행의 과정을 구체적으로 이야기하세요."
+    },
+    {
+      q:"예상하지 못한 문제가 발생했는데 상급자가 자리에 없다면 어떻게 하시겠습니까?",
+      tip:"임의 판단만 강조하기보다 가능한 범위의 조치와 보고 체계를 함께 설명하세요."
+    }
+  ];
+
+  const careerQuestions =
+    career === "경력"
+    ? [
+      {
+        q:"이직을 결정하게 된 이유는 무엇인가요?",
+        tip:"이전 직장을 비판하기보다 앞으로의 성장과 지원 직무를 중심으로 답변하세요."
+      },
+      {
+        q:"이전 직장에서 가장 의미 있었던 성과는 무엇인가요?",
+        tip:"가능하면 구체적인 변화나 결과를 포함하세요."
+      }
+    ]
+    : career === "아르바이트"
+    ? [
+      {
+        q:"아르바이트 경험을 통해 가장 크게 배운 점은 무엇인가요?",
+        tip:"책임감, 고객응대, 협업 등 지원 직무와 연결해보세요."
+      },
+      {
+        q:"근무 중 가장 바빴던 상황을 어떻게 대처했나요?",
+        tip:"당시 상황과 본인이 실제로 취한 행동을 중심으로 답변하세요."
+      }
+    ]
+    : [
+      {
+        q:"실무 경험이 부족한 부분을 어떻게 보완할 계획인가요?",
+        tip:"현재 하고 있는 학습이나 준비 과정을 구체적으로 이야기하세요."
+      },
+      {
+        q:"학교 또는 개인 경험 중 직무와 연결할 수 있는 경험이 있나요?",
+        tip:"규모가 작은 경험이라도 본인의 역할과 배운 점을 설명하면 됩니다."
+      }
+    ];
+
+  let pool = [];
+
+  if(type === "인성"){
+    pool = [...basic, ...personality, ...careerQuestions];
+  }
+
+  else if(type === "직무"){
+    pool = [...jobQuestions, ...basic, ...careerQuestions];
+  }
+
+  else if(type === "상황"){
+    pool = [...situation, ...basic, ...careerQuestions];
+  }
+
+  else{
+    pool = [
+      ...basic,
+      ...jobQuestions,
+      ...personality,
+      ...situation,
+      ...careerQuestions
+    ];
+  }
+
+  generatedQuestions =
+    shuffle(pool).slice(0,10);
+
+  const container =
+    document.getElementById("questions");
+
+  container.innerHTML = "";
+
+  generatedQuestions.forEach((item,index)=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className = "question";
+
+    div.innerHTML = `
+      <div class="question-number">
+        QUESTION ${String(index+1).padStart(2,"0")}
+      </div>
+
+      <strong>
+        ${item.q}
+      </strong>
+
+      <div class="tip">
+        <span>답변 포인트</span>
+        · ${item.tip}
+      </div>
+    `;
+
+    container.appendChild(div);
+
+  });
+
+  document.getElementById("resultBox").style.display =
+    "block";
+
+  document.getElementById("resultBox")
+    .scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+
+}
+
+
+function shuffle(array){
+
+  const copy = [...array];
+
+  for(let i = copy.length - 1; i > 0; i--){
+
+    const j =
+      Math.floor(Math.random() * (i + 1));
+
+    [copy[i],copy[j]] =
+      [copy[j],copy[i]];
+
+  }
+
+  return copy;
+}
+
+
+function copyQuestions(){
+
+  if(!generatedQuestions.length){
+    return;
+  }
+
+  const text =
+    generatedQuestions
+    .map((item,index)=>
+`${index+1}. ${item.q}
+답변 포인트: ${item.tip}`)
+    .join("\n\n");
+
+  navigator.clipboard.writeText(text)
+    .then(()=>{
+      alert("면접 예상질문이 복사되었습니다.");
+    })
+    .catch(()=>{
+      alert("복사에 실패했습니다. 직접 선택해서 복사해주세요.");
+    });
+
+}
+
+</script>
+
+</body>
+</html>
