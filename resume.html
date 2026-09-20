@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>이력서 문장 도우미 | 취업연구소</title>
+<meta name="description" content="평범한 경력과 업무 내용을 이력서에 어울리는 자연스러운 문장으로 정리해보세요.">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Arial,"Noto Sans KR",sans-serif;
+  background:#f7f9fc;
+  color:#172033;
+  line-height:1.7;
+}
+
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+
+.container{
+  width:min(900px,calc(100% - 36px));
+  margin:auto;
+}
+
+header{
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid #e8edf5;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.header-inner{
+  min-height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#2563eb;
+  font-size:21px;
+  font-weight:800;
+}
+
+.logo-icon{
+  width:35px;
+  height:35px;
+  border-radius:11px;
+  background:#2563eb;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.home{
+  color:#687386;
+  font-size:14px;
+  font-weight:700;
+}
+
+.page-head{
+  padding:65px 0 35px;
+}
+
+.badge{
+  display:inline-block;
+  padding:7px 12px;
+  background:#eff6ff;
+  color:#2563eb;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+h1{
+  font-size:38px;
+  letter-spacing:-1.5px;
+  margin-bottom:10px;
+}
+
+.page-head p{color:#748095}
+
+.tool-box,
+.result-box{
+  background:white;
+  border:1px solid #e3e9f2;
+  border-radius:24px;
+  padding:32px;
+  box-shadow:0 14px 40px rgba(36,55,84,.07);
+}
+
+.tool-box{margin-bottom:25px}
+
+.form-group{margin-bottom:23px}
+
+label{
+  display:block;
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:9px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid #dce3ed;
+  background:#fbfcfe;
+  border-radius:12px;
+  padding:14px 15px;
+  outline:none;
+}
+
+textarea{
+  min-height:140px;
+  resize:vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#2563eb;
+  background:white;
+  box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+.help{
+  display:block;
+  color:#929bad;
+  font-size:12px;
+  margin-top:6px;
+}
+
+.generate{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:16px;
+  background:#2563eb;
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.generate:hover{background:#1d4ed8}
+
+.result-box{
+  display:none;
+  margin-bottom:25px;
+}
+
+.result-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.result-header h2{font-size:21px}
+
+.complete{
+  background:#ecfdf5;
+  color:#059669;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.result{
+  background:#f8fafc;
+  border-radius:15px;
+  padding:20px;
+  white-space:pre-wrap;
+  color:#364153;
+}
+
+.copy{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  background:white;
+  border:1px solid #dbe3ee;
+  border-radius:11px;
+  cursor:pointer;
+  font-weight:800;
+  color:#475569;
+}
+
+.notice{
+  background:#eff6ff;
+  border-radius:15px;
+  padding:18px 20px;
+  color:#53627a;
+  font-size:13px;
+  margin-bottom:60px;
+}
+
+.notice strong{color:#2563eb}
+
+footer{
+  background:#0b1120;
+  color:#8d98aa;
+  padding:38px 0;
+  font-size:13px;
+}
+
+footer strong{
+  color:white;
+  display:block;
+}
+
+@media(max-width:600px){
+  .page-head{padding-top:45px}
+  h1{font-size:31px}
+  .tool-box,.result-box{padding:21px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container header-inner">
+
+<a href="index.html" class="logo">
+<div class="logo-icon">💼</div>
+취업연구소
+</a>
+
+<a href="index.html" class="home">
+← 메인으로
+</a>
+
+</div>
+</header>
+
+
+<main class="container">
+
+<div class="page-head">
+
+<div class="badge">FREE JOB TOOL</div>
+
+<h1>이력서 문장 도우미</h1>
+
+<p>
+내가 했던 일을 입력하면 이력서에 사용하기 좋은 형태로 정리해드립니다.
+</p>
+
+</div>
+
+
+<div class="tool-box">
+
+<div class="form-group">
+
+<label for="job">
+직무 또는 업무 분야
+</label>
+
+<input
+id="job"
+type="text"
+placeholder="예: 음식점 홀 서비스, 사무직, 마케팅">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="type">
+문장 스타일
+</label>
+
+<select id="type">
+<option value="basic">깔끔하고 기본적인 표현</option>
+<option value="professional">전문적인 표현</option>
+<option value="achievement">성과 중심 표현</option>
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="work">
+실제로 했던 업무
+</label>
+
+<textarea
+id="work"
+placeholder="예: 고객 주문을 받고 테이블을 관리했으며 바쁜 시간에는 다른 직원들과 역할을 나눠 매장을 운영했습니다."
+></textarea>
+
+<span class="help">
+편하게 말하듯 입력해도 됩니다.
+</span>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="resultInput">
+성과 또는 잘했던 점
+</label>
+
+<textarea
+id="resultInput"
+placeholder="예: 고객 불만을 빠르게 처리했고 신입 직원에게 업무를 알려준 경험이 있습니다. (선택)"
+></textarea>
+
+</div>
+
+
+<button class="generate" onclick="generateResume()">
+이력서 문장 만들기 →
+</button>
+
+</div>
+
+
+<div class="result-box" id="resultBox">
+
+<div class="result-header">
+
+<h2>정리된 문장</h2>
+
+<div class="complete">
+완성
+</div>
+
+</div>
+
+<div class="result" id="result"></div>
+
+<button class="copy" onclick="copyResult()">
+결과 복사하기
+</button>
+
+</div>
+
+
+<div class="notice">
+<strong>TIP.</strong>
+실제 담당했던 업무와 구체적인 성과를 함께 입력하면
+더 설득력 있는 이력서 문장을 만들 수 있습니다.
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="container">
+<strong>취업연구소</strong>
+취업 준비를 조금 더 쉽고 간단하게.
+</div>
+
+</footer>
+
+
+<script>
+
+function generateResume(){
+
+const job =
+document.getElementById("job").value.trim();
+
+const type =
+document.getElementById("type").value;
+
+const work =
+document.getElementById("work").value.trim();
+
+const achievement =
+document.getElementById("resultInput").value.trim();
+
+
+if(!job){
+alert("직무 또는 업무 분야를 입력해주세요.");
+return;
+}
+
+if(!work){
+alert("실제로 했던 업무를 입력해주세요.");
+return;
+}
+
+
+let text = "";
+
+
+if(type === "basic"){
+
+text =
+`[${job}]
+
+• 주요 업무
+${work}
+
+${achievement
+? `• 업무 경험 및 강점
+${achievement}
+
+`
+: ""}
+주어진 업무를 책임감 있게 수행하며 원활한 업무 진행을 위해 동료들과 적극적으로 협업했습니다. 다양한 상황에 유연하게 대응하며 맡은 역할을 안정적으로 수행한 경험이 있습니다.`;
+
+}
+
+
+else if(type === "professional"){
+
+text =
+`[${job} 직무 경험]
+
+${work}
+
+업무 과정에서 상황을 빠르게 파악하고 필요한 업무를 우선적으로 처리하며 안정적인 운영을 지원했습니다.
+
+${achievement
+? `또한 ${achievement}
+
+`
+: ""}
+업무 효율성과 원활한 협업을 중요하게 생각하며 맡은 역할을 책임감 있게 수행했습니다.`;
+
+}
+
+
+else{
+
+text =
+`[${job} 주요 경험 및 성과]
+
+• 담당 업무
+${work}
+
+${achievement
+? `• 주요 성과
+${achievement}
+
+`
+: ""}
+업무 과정에서 발생하는 다양한 상황에 능동적으로 대응하고 동료들과 역할을 조율하여 업무가 원활하게 진행될 수 있도록 기여했습니다.`;
+
+}
+
+
+document.getElementById("result").textContent = text;
+
+const box =
+document.getElementById("resultBox");
+
+box.style.display = "block";
+
+box.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+}
+
+
+function copyResult(){
+
+const text =
+document.getElementById("result").innerText;
+
+navigator.clipboard.writeText(text)
+.then(()=>{
+alert("이력서 문장이 복사되었습니다.");
+})
+.catch(()=>{
+alert("복사에 실패했습니다. 직접 선택해서 복사해주세요.");
+});
+
+}
+
+</script>
+
+</body>
+</html>
