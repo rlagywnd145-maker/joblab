@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>지원동기 작성기 | 취업연구소</title>
+<meta name="description" content="지원 회사와 직무, 경험을 입력하면 자연스러운 지원동기 초안을 무료로 만들어드립니다.">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Arial,"Noto Sans KR",sans-serif;
+  background:#f7f9fc;
+  color:#172033;
+  line-height:1.7;
+}
+
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+
+.container{
+  width:min(900px,calc(100% - 36px));
+  margin:auto;
+}
+
+header{
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid #e8edf5;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.header-inner{
+  min-height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#2563eb;
+  font-size:21px;
+  font-weight:800;
+}
+
+.logo-icon{
+  width:35px;
+  height:35px;
+  border-radius:11px;
+  background:#2563eb;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.home{
+  color:#687386;
+  font-size:14px;
+  font-weight:700;
+}
+
+.page-head{
+  padding:65px 0 35px;
+}
+
+.badge{
+  display:inline-block;
+  padding:7px 12px;
+  background:#eff6ff;
+  color:#2563eb;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:14px;
+}
+
+h1{
+  font-size:38px;
+  letter-spacing:-1.5px;
+  margin-bottom:10px;
+}
+
+.page-head p{color:#748095}
+
+.tool-box,.result-box{
+  background:white;
+  border:1px solid #e3e9f2;
+  border-radius:24px;
+  padding:32px;
+  box-shadow:0 14px 40px rgba(36,55,84,.07);
+}
+
+.tool-box{margin-bottom:25px}
+
+.form-group{margin-bottom:23px}
+
+label{
+  display:block;
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:9px;
+}
+
+input,select,textarea{
+  width:100%;
+  border:1px solid #dce3ed;
+  background:#fbfcfe;
+  border-radius:12px;
+  padding:14px 15px;
+  outline:none;
+}
+
+textarea{
+  resize:vertical;
+  min-height:120px;
+}
+
+input:focus,select:focus,textarea:focus{
+  border-color:#2563eb;
+  background:white;
+  box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+.help{
+  display:block;
+  margin-top:6px;
+  color:#929bad;
+  font-size:12px;
+}
+
+.generate{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:16px;
+  background:#2563eb;
+  color:white;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.generate:hover{background:#1d4ed8}
+
+.result-box{
+  display:none;
+  margin-bottom:25px;
+}
+
+.result-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.result-head h2{font-size:21px}
+
+.complete{
+  background:#ecfdf5;
+  color:#059669;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+}
+
+.result{
+  background:#f8fafc;
+  border-radius:15px;
+  padding:22px;
+  white-space:pre-wrap;
+  color:#364153;
+}
+
+.copy{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:1px solid #dbe3ee;
+  background:white;
+  border-radius:11px;
+  font-weight:800;
+  cursor:pointer;
+  color:#475569;
+}
+
+.notice{
+  background:#eff6ff;
+  padding:18px 20px;
+  border-radius:15px;
+  color:#53627a;
+  font-size:13px;
+  margin-bottom:60px;
+}
+
+.notice strong{color:#2563eb}
+
+footer{
+  background:#0b1120;
+  color:#8d98aa;
+  padding:38px 0;
+  font-size:13px;
+}
+
+footer strong{
+  display:block;
+  color:white;
+}
+
+@media(max-width:600px){
+  .page-head{padding-top:45px}
+  h1{font-size:31px}
+  .tool-box,.result-box{padding:21px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container header-inner">
+
+<a href="index.html" class="logo">
+<div class="logo-icon">💼</div>
+취업연구소
+</a>
+
+<a href="index.html" class="home">← 메인으로</a>
+
+</div>
+</header>
+
+<main class="container">
+
+<div class="page-head">
+
+<div class="badge">FREE JOB TOOL</div>
+
+<h1>지원동기 작성기</h1>
+
+<p>
+지원하는 회사와 직무, 나의 경험을 입력하면 지원동기 초안을 만들어드립니다.
+</p>
+
+</div>
+
+
+<div class="tool-box">
+
+<div class="form-group">
+
+<label for="company">지원 회사 또는 업종</label>
+
+<input
+type="text"
+id="company"
+placeholder="예: OO레스토랑, 외식업, IT기업">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="job">지원 직무</label>
+
+<input
+type="text"
+id="job"
+placeholder="예: 홀 서비스, 사무직, 마케팅">
+
+</div>
+
+
+<div class="form-group">
+
+<label for="reason">이 회사·직무에 관심을 가진 이유</label>
+
+<textarea
+id="reason"
+placeholder="예: 고객과 직접 소통하는 업무를 좋아하고 기존 서비스직 경험을 활용할 수 있다고 생각했습니다."></textarea>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="experience">관련 경험 또는 강점</label>
+
+<textarea
+id="experience"
+placeholder="예: 음식점에서 고객 안내와 주문 응대를 담당했고 바쁜 시간에도 침착하게 업무를 처리했습니다."></textarea>
+
+<span class="help">
+직무와 관련된 경험을 구체적으로 적어주세요.
+</span>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="goal">입사 후 하고 싶은 일</label>
+
+<textarea
+id="goal"
+placeholder="예: 빠르게 업무를 익히고 고객 만족과 원활한 매장 운영에 기여하고 싶습니다."></textarea>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="style">작성 스타일</label>
+
+<select id="style">
+<option value="basic">깔끔한 기본형</option>
+<option value="passion">적극적인 지원형</option>
+<option value="experience">경험 중심형</option>
+</select>
+
+</div>
+
+
+<button class="generate" onclick="generateMotivation()">
+지원동기 만들기 →
+</button>
+
+</div>
+
+
+<div class="result-box" id="resultBox">
+
+<div class="result-head">
+<h2>지원동기 초안</h2>
+<div class="complete">완성</div>
+</div>
+
+<div class="result" id="result"></div>
+
+<button class="copy" onclick="copyResult()">
+결과 복사하기
+</button>
+
+</div>
+
+
+<div class="notice">
+<strong>TIP.</strong>
+회사 이름만 바꿔서 제출하기보다는 실제 지원하는 회사의 특징을 한두 가지 추가하면
+훨씬 설득력 있는 지원동기가 됩니다.
+</div>
+
+</main>
+
+
+<footer>
+<div class="container">
+<strong>취업연구소</strong>
+취업 준비를 조금 더 쉽고 간단하게.
+</div>
+</footer>
+
+
+<script>
+
+function generateMotivation(){
+
+  const company =
+    document.getElementById("company").value.trim();
+
+  const job =
+    document.getElementById("job").value.trim();
+
+  const reason =
+    document.getElementById("reason").value.trim();
+
+  const experience =
+    document.getElementById("experience").value.trim();
+
+  const goal =
+    document.getElementById("goal").value.trim();
+
+  const style =
+    document.getElementById("style").value;
+
+
+  if(!company){
+    alert("지원 회사 또는 업종을 입력해주세요.");
+    return;
+  }
+
+  if(!job){
+    alert("지원 직무를 입력해주세요.");
+    return;
+  }
+
+  if(!reason){
+    alert("관심을 가진 이유를 입력해주세요.");
+    return;
+  }
+
+  if(!experience){
+    alert("관련 경험 또는 강점을 입력해주세요.");
+    return;
+  }
+
+
+  let text = "";
+
+
+  if(style === "passion"){
+
+    text =
+`${reason}
+
+저는 이러한 관심을 단순한 지원 이유에 그치지 않고 실제 ${job} 업무에서 성과로 이어가고 싶어 ${company}에 지원했습니다.
+
+특히 ${experience}
+
+이 경험을 통해 맡은 업무에 책임감을 가지고 상황에 적극적으로 대응하는 자세를 배웠습니다. 제가 가진 경험과 강점을 바탕으로 새로운 업무도 빠르게 배우고 조직에 도움이 되는 구성원이 되겠습니다.
+
+${goal ? goal : `${company}에서 ${job} 업무에 필요한 역량을 꾸준히 발전시키며 회사와 함께 성장하고 싶습니다.`}`;
+
+
+  } else if(style === "experience"){
+
+    text =
+`${experience}
+
+이러한 경험을 통해 ${job} 업무에 필요한 책임감과 상황 대응 능력을 키울 수 있었습니다.
+
+${reason}
+
+제가 지금까지 쌓아온 경험을 ${company}에서도 활용할 수 있다고 생각해 지원하게 되었습니다. 기존 경험에 만족하지 않고 새로운 업무 방식과 필요한 역량을 꾸준히 배우겠습니다.
+
+${goal ? goal : `입사 후에는 업무를 빠르게 익혀 조직에 안정적으로 기여할 수 있는 구성원으로 성장하겠습니다.`}`;
+
+
+  } else {
+
+    text =
+`${reason}
+
+그동안의 경험을 통해 ${job} 업무에 필요한 기본적인 역량과 책임감을 쌓아왔습니다. ${experience}
+
+이러한 경험과 강점을 ${company}에서 더욱 발전시키고 싶어 지원하게 되었습니다. 새로운 환경에서도 업무를 빠르게 이해하고 주변 구성원과 원활하게 협업하며 맡은 역할을 성실하게 수행하겠습니다.
+
+${goal ? goal : `입사 후에는 ${job} 업무를 빠르게 익히고 꾸준히 역량을 발전시키며 조직에 도움이 되는 구성원이 되겠습니다.`}`;
+
+  }
+
+
+  document.getElementById("result").textContent = text;
+
+  const box =
+    document.getElementById("resultBox");
+
+  box.style.display = "block";
+
+  box.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+function copyResult(){
+
+  const text =
+    document.getElementById("result").innerText;
+
+  navigator.clipboard.writeText(text)
+  .then(()=>{
+    alert("지원동기가 복사되었습니다.");
+  })
+  .catch(()=>{
+    alert("복사에 실패했습니다. 직접 선택해서 복사해주세요.");
+  });
+
+}
+
+</script>
+
+</body>
+</html>
