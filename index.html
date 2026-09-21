@@ -46,7 +46,7 @@
   <!-- 여기까지 -->
 
   <style>
-  <style>
+  
     * {
       box-sizing: border-box;
       margin: 0;
@@ -1073,7 +1073,102 @@
 
   </div>
 </section>
+/* =========================
+   취업연구소 Footer
+========================= */
 
+.site-footer {
+  background: #0b1220;
+  color: #ffffff;
+  padding: 48px 20px;
+  margin-top: 50px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.footer-info h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.footer-description {
+  margin: 0 0 16px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.operator-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  margin-bottom: 18px;
+  background: rgba(37, 99, 235, 0.12);
+  border: 1px solid rgba(96, 165, 250, 0.22);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.operator-badge span {
+  color: #93c5fd;
+}
+
+.operator-badge strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  font-size: 13px;
+}
+
+.footer-links a {
+  color: #94a3b8;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+.footer-links span {
+  color: #475569;
+}
+
+.footer-copy {
+  color: #94a3b8;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .site-footer {
+    padding: 38px 20px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .footer-copy {
+    white-space: normal;
+  }
+}
 <style>
   .guide-section {
     max-width: 1100px;
@@ -1182,28 +1277,31 @@
 </main>
 
 
-<footer>
-  <div class="container footer-inner">
+<footer class="site-footer">
+  <div class="footer-inner">
 
-    <div>
-      <div class="footer-logo">
-        취업연구소
-      </div>
+    <div class="footer-info">
+      <h3>취업연구소</h3>
 
-      <div>
+      <p class="footer-description">
         취업 준비를 조금 더 쉽고 간단하게.
+      </p>
+
+      <div class="operator-badge">
+        <span>운영자</span>
+        <strong>김효중</strong>
       </div>
 
-      <div style="margin-top:12px; display:flex; gap:12px; flex-wrap:wrap;">
-        <a href="about.html" style="color:inherit;">취업연구소 소개</a>
+      <div class="footer-links">
+        <a href="./about.html">취업연구소 소개</a>
         <span>·</span>
-        <a href="privacy.html" style="color:inherit;">개인정보처리방침</a>
+        <a href="./privacy.html">개인정보처리방침</a>
         <span>·</span>
-        <a href="contact.html" style="color:inherit;">문의하기</a>
+        <a href="./contact.html">문의하기</a>
       </div>
     </div>
 
-    <div>
+    <div class="footer-copy">
       © 2026 취업연구소
     </div>
 
