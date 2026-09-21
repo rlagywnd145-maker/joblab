@@ -768,7 +768,8 @@
   const resultContent = document.getElementById("resultContent");
   const payButton = document.getElementById("payButton");
 
-  const API_URL = "https://joblab-ai.rlagywnd145.workers.dev/";
+  const API_URL =
+    "https://joblab-ai.rlagywnd145.workers.dev/";
 
   essay.addEventListener("input", function () {
     counter.textContent =
@@ -790,9 +791,11 @@
     }
 
     analyzeButton.disabled = true;
-    analyzeButton.textContent = "✨ AI가 첨삭하고 있습니다...";
+    analyzeButton.textContent =
+      "✨ AI가 첨삭하고 있습니다...";
 
     result.classList.add("show");
+
     resultContent.textContent =
       "자기소개서를 분석하고 있습니다.\n잠시만 기다려주세요.";
 
@@ -810,24 +813,118 @@
 
       const data = await response.json();
 
+      // 하루 무료 횟수 소진
+      if (response.status === 429 && data.limitReached) {
+
+        resultContent.innerHTML = `
+          <div style="text-align:center;padding:18px 5px;">
+            <div style="font-size:34px;margin-bottom:10px;">
+              ⏰
+            </div>
+
+            <div style="
+              font-size:19px;
+              font-weight:800;
+              margin-bottom:8px;
+              color:#111827;
+            ">
+              오늘의 무료 첨삭을 모두 사용했어요
+            </div>
+
+            <div style="
+              color:#64748b;
+              font-size:14px;
+              line-height:1.8;
+            ">
+              무료 AI 첨삭은 하루 3회까지 이용할 수 있습니다.<br>
+              내일 다시 이용해주세요.
+            </div>
+
+            <div style="
+              display:inline-block;
+              margin-top:16px;
+              padding:7px 13px;
+              background:#eff6ff;
+              color:#2563eb;
+              border-radius:999px;
+              font-size:13px;
+              font-weight:800;
+            ">
+              오늘 3 / 3회 사용
+            </div>
+          </div>
+        `;
+
+        analyzeButton.disabled = true;
+        analyzeButton.textContent =
+          "오늘 무료 이용 완료";
+
+        return;
+      }
+
       if (!response.ok || !data.ok) {
         throw new Error(
-          data.error || "AI 첨삭 중 오류가 발생했습니다."
+          data.error ||
+          "AI 첨삭 중 오류가 발생했습니다."
         );
       }
 
+      // AI 결과
+      const remaining =
+        data.usage?.remaining ?? 0;
+
+      const used =
+        data.usage?.used ?? 0;
+
       resultContent.textContent = data.result;
+
+      // 사용량 표시
+      const usageBox = document.createElement("div");
+
+      usageBox.style.marginTop = "22px";
+      usageBox.style.padding = "12px 15px";
+      usageBox.style.background = "#eff6ff";
+      usageBox.style.borderRadius = "10px";
+      usageBox.style.color = "#2563eb";
+      usageBox.style.fontSize = "13px";
+      usageBox.style.fontWeight = "800";
+      usageBox.style.textAlign = "center";
+
+      if (remaining > 0) {
+        usageBox.textContent =
+          `오늘 무료 첨삭 ${used} / 3회 사용 · ${remaining}회 남음`;
+      } else {
+        usageBox.textContent =
+          "오늘 무료 첨삭 3 / 3회 사용 · 무료 이용 완료";
+      }
+
+      resultContent.appendChild(usageBox);
+
+      // 3번째 사용 직후 버튼 잠금
+      if (remaining === 0) {
+        analyzeButton.disabled = true;
+        analyzeButton.textContent =
+          "오늘 무료 이용 완료";
+      }
 
     } catch (error) {
       console.error(error);
 
       resultContent.textContent =
-        "오류가 발생했습니다.\n\n" +
+        "AI 첨삭 중 문제가 발생했습니다.\n\n" +
         error.message;
 
     } finally {
-      analyzeButton.disabled = false;
-      analyzeButton.textContent = "✨ AI로 첨삭하기";
+
+      // 아직 제한되지 않은 경우에만 버튼 복구
+      if (
+        analyzeButton.textContent !==
+        "오늘 무료 이용 완료"
+      ) {
+        analyzeButton.disabled = false;
+        analyzeButton.textContent =
+          "✨ AI로 첨삭하기";
+      }
 
       result.scrollIntoView({
         behavior: "smooth",
@@ -838,8 +935,8 @@
 
   payButton.addEventListener("click", function () {
     alert(
-      "AI Pro 결제 기능은 아직 준비 중입니다.\n" +
-      "AI 기능 테스트 완료 후 결제 시스템을 연결할 예정입니다."
+      "AI Pro 결제 기능은 준비 중입니다.\n" +
+      "정식 출시 후 이용할 수 있습니다."
     );
   });
 </script>
