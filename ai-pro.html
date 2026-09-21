@@ -770,7 +770,41 @@
 
   const API_URL =
     "https://joblab-ai.rlagywnd145.workers.dev/";
+async function loadUsage() {
+  try {
+    const response = await fetch(API_URL);
+    const data = await response.json();
 
+    if (!response.ok || !data.ok) {
+      return;
+    }
+
+    const used = data.usage?.used ?? 0;
+    const remaining = data.usage?.remaining ?? 3;
+
+    if (remaining <= 0) {
+      analyzeButton.disabled = true;
+      analyzeButton.textContent =
+        "오늘 무료 이용 완료";
+    } else if (used > 0) {
+      analyzeButton.disabled = false;
+      analyzeButton.textContent =
+        `✨ AI로 첨삭하기 · ${remaining}회 남음`;
+    } else {
+      analyzeButton.disabled = false;
+      analyzeButton.textContent =
+        "✨ AI로 첨삭하기";
+    }
+
+  } catch (error) {
+    console.error(
+      "사용량 조회 실패:",
+      error
+    );
+  }
+}
+
+loadUsage();
   essay.addEventListener("input", function () {
     counter.textContent =
       essay.value.length.toLocaleString() + " / 5,000";
@@ -896,14 +930,13 @@ resultContent.textContent = data.result;
     } finally {
 
       // 아직 제한되지 않은 경우에만 버튼 복구
-      if (
-        analyzeButton.textContent !==
-        "오늘 무료 이용 완료"
-      ) {
-        analyzeButton.disabled = false;
-        analyzeButton.textContent =
-          "✨ AI로 첨삭하기";
-      }
+     if (
+  analyzeButton.textContent !==
+  "오늘 무료 이용 완료"
+) {
+  analyzeButton.disabled = false;
+  await loadUsage();
+}
 
       result.scrollIntoView({
         behavior: "smooth",
