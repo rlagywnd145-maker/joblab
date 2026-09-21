@@ -761,7 +761,6 @@
 
 
 <script>
-
   const essay = document.getElementById("essay");
   const counter = document.getElementById("counter");
   const analyzeButton = document.getElementById("analyzeButton");
@@ -769,55 +768,80 @@
   const resultContent = document.getElementById("resultContent");
   const payButton = document.getElementById("payButton");
 
+  const API_URL = "https://joblab-ai.rlagywnd145.workers.dev/";
 
-  essay.addEventListener("input", function(){
-
+  essay.addEventListener("input", function () {
     counter.textContent =
       essay.value.length.toLocaleString() + " / 5,000";
-
   });
 
-
-  analyzeButton.addEventListener("click", function(){
-
+  analyzeButton.addEventListener("click", async function () {
     const job = document.getElementById("job").value;
     const text = essay.value.trim();
 
-    if(!job){
+    if (!job) {
       alert("지원 직무를 선택해주세요.");
       return;
     }
 
-    if(text.length < 30){
+    if (text.length < 30) {
       alert("첨삭할 자기소개서를 30자 이상 입력해주세요.");
       return;
     }
 
+    analyzeButton.disabled = true;
+    analyzeButton.textContent = "✨ AI가 첨삭하고 있습니다...";
+
     result.classList.add("show");
-
     resultContent.textContent =
-      "현재 AI Pro 화면 제작이 완료되었습니다.\n\n" +
-      "다음 단계에서 안전한 AI 백엔드를 연결하면 " +
-      "이 영역에 실제 자기소개서 첨삭 결과가 표시됩니다.";
+      "자기소개서를 분석하고 있습니다.\n잠시만 기다려주세요.";
 
-    result.scrollIntoView({
-      behavior:"smooth",
-      block:"nearest"
-    });
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          job: job,
+          essay: text
+        })
+      });
 
+      const data = await response.json();
+
+      if (!response.ok || !data.ok) {
+        throw new Error(
+          data.error || "AI 첨삭 중 오류가 발생했습니다."
+        );
+      }
+
+      resultContent.textContent = data.result;
+
+    } catch (error) {
+      console.error(error);
+
+      resultContent.textContent =
+        "오류가 발생했습니다.\n\n" +
+        error.message;
+
+    } finally {
+      analyzeButton.disabled = false;
+      analyzeButton.textContent = "✨ AI로 첨삭하기";
+
+      result.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    }
   });
 
-
-  payButton.addEventListener("click", function(){
-
+  payButton.addEventListener("click", function () {
     alert(
       "AI Pro 결제 기능은 아직 준비 중입니다.\n" +
       "AI 기능 테스트 완료 후 결제 시스템을 연결할 예정입니다."
     );
-
   });
-
 </script>
-
 </body>
 </html>
