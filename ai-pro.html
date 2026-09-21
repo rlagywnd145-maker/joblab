@@ -810,10 +810,18 @@ async function loadUsage() {
 }
 
 loadUsage();
-  essay.addEventListener("input", function () {
-    counter.textContent =
-      essay.value.length.toLocaleString() + " / 5,000";
-  });
+  function updateCounter() {
+  counter.textContent =
+    essay.value.length.toLocaleString() + " / 5,000";
+}
+
+essay.addEventListener("input", updateCounter);
+essay.addEventListener("keyup", updateCounter);
+essay.addEventListener("paste", function () {
+  setTimeout(updateCounter, 0);
+});
+
+updateCounter();
 
   analyzeButton.addEventListener("click", async function () {
         if (analyzeButton.dataset.limitReached === "true") {
