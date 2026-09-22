@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI 면접 코치 | 취업연구소</title>
+<meta name="description" content="지원 직무에 맞는 예상 면접 질문과 답변 피드백을 AI로 받아보세요.">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Arial,"Noto Sans KR",sans-serif;
+  background:#f6f8fc;
+  color:#111827;
+  line-height:1.7;
+}
+
+a{text-decoration:none;color:inherit}
+
+header{
+  background:#fff;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:17px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  color:#2563eb;
+}
+
+.back{
+  color:#64748b;
+  font-size:14px;
+  font-weight:700;
+}
+
+main{
+  max-width:900px;
+  margin:auto;
+  padding:55px 20px 90px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.title h1{
+  font-size:32px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#64748b;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:22px;
+  padding:32px;
+  box-shadow:0 12px 35px rgba(15,23,42,.06);
+}
+
+.form-group{
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  font-size:14px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+select,
+input,
+textarea{
+  width:100%;
+  border:1px solid #dbe2ea;
+  border-radius:11px;
+  background:#fff;
+  outline:none;
+  font:inherit;
+}
+
+select,
+input{
+  height:48px;
+  padding:0 13px;
+}
+
+textarea{
+  min-height:220px;
+  padding:15px;
+  resize:vertical;
+}
+
+select:focus,
+input:focus,
+textarea:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 3px rgba(37,99,235,.08);
+}
+
+.info{
+  display:flex;
+  justify-content:space-between;
+  margin-top:7px;
+  color:#94a3b8;
+  font-size:12px;
+}
+
+button{
+  width:100%;
+  border:0;
+  background:#2563eb;
+  color:#fff;
+  padding:15px;
+  border-radius:11px;
+  font-size:15px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+button:hover{background:#1d4ed8}
+
+button:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+
+.result{
+  display:none;
+  margin-top:25px;
+  padding:24px;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+}
+
+.result.show{display:block}
+
+.result h3{
+  font-size:18px;
+  margin-bottom:14px;
+}
+
+.result-content{
+  white-space:pre-wrap;
+  color:#334155;
+  font-size:15px;
+}
+
+.notice{
+  margin-top:18px;
+  padding:14px;
+  background:#eff6ff;
+  color:#1d4ed8;
+  border-radius:10px;
+  font-size:13px;
+}
+
+footer{
+  text-align:center;
+  padding:35px 20px;
+  color:#94a3b8;
+  font-size:13px;
+}
+
+@media(max-width:650px){
+  main{padding:35px 14px 60px}
+  .card{padding:22px 18px}
+  .title h1{font-size:27px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="./index.html" class="logo">
+      💼 취업연구소
+    </a>
+
+    <a href="./ai-pro.html" class="back">
+      ← AI Pro
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <div class="title">
+    <h1>🎤 AI 면접 코치</h1>
+    <p>
+      면접 질문에 대한 답변을 입력하면
+      AI가 강점과 개선점을 분석합니다.
+    </p>
+  </div>
+
+  <div class="card">
+
+    <div class="form-group">
+      <label for="job">지원 직무</label>
+
+      <select id="job">
+        <option value="">직무를 선택해주세요</option>
+        <option>서비스·고객응대</option>
+        <option>사무·경영지원</option>
+        <option>영업·마케팅</option>
+        <option>IT·개발</option>
+        <option>디자인</option>
+        <option>생산·기술</option>
+        <option>물류·유통</option>
+        <option>기타</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="question">면접 질문</label>
+
+      <input
+        id="question"
+        type="text"
+        maxlength="300"
+        placeholder="예: 본인의 장점과 단점을 말씀해주세요."
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="essay">내 답변</label>
+
+      <textarea
+        id="essay"
+        maxlength="5000"
+        placeholder="실제 면접에서 답변하듯 작성해주세요."
+      ></textarea>
+
+      <div class="info">
+        <span>실제 경험을 바탕으로 작성하는 것을 권장합니다.</span>
+        <span id="counter">0 / 5,000</span>
+      </div>
+    </div>
+
+    <button type="button" id="analyzeButton">
+      🎤 AI에게 면접 피드백 받기
+    </button>
+
+    <div class="result" id="result">
+      <h3>AI 면접 피드백</h3>
+      <div class="result-content" id="resultContent"></div>
+    </div>
+
+    <div class="notice">
+      💡 AI는 입력한 내용을 바탕으로 피드백합니다.
+      입력하지 않은 경험이나 성과를 사실처럼 추가하지 않도록 요청합니다.
+    </div>
+
+  </div>
+
+</main>
+
+<footer>
+  © 2026 취업연구소. All rights reserved.
+</footer>
+
+<script>
+const API_URL =
+  "https://joblab-ai.rlagywnd145.workers.dev/";
+
+const essay = document.getElementById("essay");
+const counter = document.getElementById("counter");
+const button = document.getElementById("analyzeButton");
+const result = document.getElementById("result");
+const resultContent = document.getElementById("resultContent");
+
+let limitReached = false;
+
+
+/* 글자 수 */
+
+function updateCounter(){
+  counter.textContent =
+    essay.value.length.toLocaleString() + " / 5,000";
+}
+
+essay.addEventListener("input", updateCounter);
+updateCounter();
+
+
+/* 무료 사용량 확인 */
+
+async function loadUsage(){
+
+  try{
+
+    const response = await fetch(API_URL);
+    const data = await response.json();
+
+    if(!response.ok || !data.ok){
+      return;
+    }
+
+    const used =
+      Number(data.usage?.used || 0);
+
+    const remaining =
+      Number(data.usage?.remaining ?? 3);
+
+    if(remaining <= 0){
+
+      limitReached = true;
+
+      button.disabled = false;
+      button.textContent =
+        "오늘 무료 이용 완료";
+
+    }else if(used > 0){
+
+      button.textContent =
+        `🎤 AI에게 면접 피드백 받기 · ${remaining}회 남음`;
+
+    }
+
+  }catch(error){
+    console.error(error);
+  }
+}
+
+
+/* 무료 이용 완료 안내 */
+
+function showLimit(){
+
+  result.classList.add("show");
+  resultContent.style.whiteSpace = "normal";
+
+  resultContent.innerHTML =
+    '<div style="text-align:center;padding:14px 5px;">' +
+      '<div style="font-size:32px;margin-bottom:8px;">⏰</div>' +
+      '<div style="font-size:18px;font-weight:800;margin-bottom:7px;color:#111827;">' +
+        '오늘의 무료 AI 이용을 모두 사용했어요' +
+      '</div>' +
+      '<div style="color:#64748b;font-size:14px;line-height:1.7;">' +
+        '무료 AI 기능은 하루 3회까지 이용할 수 있습니다.<br>' +
+        '내일 다시 이용해주세요.' +
+      '</div>' +
+      '<div style="display:inline-block;margin-top:14px;padding:7px 13px;background:#eff6ff;color:#2563eb;border-radius:999px;font-size:13px;font-weight:800;">' +
+        '오늘 3 / 3회 사용' +
+      '</div>' +
+    '</div>';
+
+  result.scrollIntoView({
+    behavior:"smooth",
+    block:"nearest"
+  });
+}
+
+
+/* AI 면접 분석 */
+
+button.addEventListener(
+  "click",
+  async function(){
+
+    if(limitReached){
+      showLimit();
+      return;
+    }
+
+    const job =
+      document.getElementById("job").value;
+
+    const question =
+      document.getElementById("question").value.trim();
+
+    const answer =
+      essay.value.trim();
+
+
+    if(!job){
+      alert("지원 직무를 선택해주세요.");
+      return;
+    }
+
+    if(question.length < 5){
+      alert("면접 질문을 입력해주세요.");
+      return;
+    }
+
+    if(answer.length < 20){
+      alert("면접 답변을 20자 이상 입력해주세요.");
+      return;
+    }
+
+
+    button.disabled = true;
+    button.textContent =
+      "🎤 AI가 답변을 분석하고 있습니다...";
+
+    result.classList.add("show");
+
+    resultContent.style.whiteSpace =
+      "pre-wrap";
+
+    resultContent.textContent =
+      "면접 답변을 분석하고 있습니다.\n잠시만 기다려주세요.";
+
+
+    const requestText =
+`[AI 면접 코치 요청]
+
+면접 질문:
+${question}
+
+사용자의 답변:
+${answer}
+
+위 답변을 지원 직무에 맞춰 분석해주세요.
+
+반드시 다음 원칙을 지켜주세요.
+
+1. 사용자가 말하지 않은 경험, 경력, 성과, 자격증, 수치 또는 사실을 만들어내지 마세요.
+2. 답변의 좋은 점을 구체적으로 알려주세요.
+3. 부족하거나 모호한 부분을 알려주세요.
+4. 질문에 제대로 답하고 있는지 평가해주세요.
+5. 지원 직무와의 연결성을 확인해주세요.
+6. 실제 면접에서 더 자연스럽게 말할 수 있도록 표현을 개선해주세요.
+7. 추가 정보가 필요하다면 사실을 지어내지 말고 어떤 내용을 추가하면 좋은지 알려주세요.
+8. 개선 답변 예시는 사용자가 제공한 사실만 사용해주세요.
+
+다음 형식으로 답변해주세요.
+
+[답변 평가]
+
+[좋은 점]
+
+[개선할 점]
+
+[직무 연결성]
+
+[면접에서 주의할 점]
+
+[개선 답변 예시]`;
+
+
+    try{
+
+      const response =
+        await fetch(API_URL,{
+          method:"POST",
+
+          headers:{
+            "Content-Type":"application/json"
+          },
+
+          body:JSON.stringify({
+            job:job,
+            essay:requestText
+          })
+        });
+
+
+      const data =
+        await response.json();
+
+
+      if(
+        response.status === 429 &&
+        data.limitReached
+      ){
+
+        limitReached = true;
+
+        button.disabled = false;
+        button.textContent =
+          "오늘 무료 이용 완료";
+
+        showLimit();
+
+        return;
+      }
+
+
+      if(!response.ok || !data.ok){
+
+        throw new Error(
+          data.error ||
+          "AI 면접 분석 중 오류가 발생했습니다."
+        );
+      }
+
+
+      resultContent.style.whiteSpace =
+        "pre-wrap";
+
+      resultContent.textContent =
+        data.result;
+
+
+      const used =
+        Number(data.usage?.used || 0);
+
+      const remaining =
+        Number(data.usage?.remaining ?? 0);
+
+
+      const usageBox =
+        document.createElement("div");
+
+      usageBox.style.marginTop = "22px";
+      usageBox.style.padding = "12px";
+      usageBox.style.background = "#eff6ff";
+      usageBox.style.color = "#2563eb";
+      usageBox.style.borderRadius = "10px";
+      usageBox.style.textAlign = "center";
+      usageBox.style.fontSize = "13px";
+      usageBox.style.fontWeight = "800";
+      usageBox.style.whiteSpace = "normal";
+
+
+      if(remaining > 0){
+
+        usageBox.textContent =
+          `오늘 무료 AI 이용 ${used} / 3회 · ${remaining}회 남음`;
+
+        button.disabled = false;
+
+        button.textContent =
+          `🎤 AI에게 면접 피드백 받기 · ${remaining}회 남음`;
+
+      }else{
+
+        limitReached = true;
+
+        usageBox.textContent =
+          "오늘 무료 AI 이용 3 / 3회 · 무료 이용 완료";
+
+        button.disabled = false;
+        button.textContent =
+          "오늘 무료 이용 완료";
+      }
+
+
+      resultContent.appendChild(
+        usageBox
+      );
+
+
+    }catch(error){
+
+      console.error(error);
+
+      resultContent.style.whiteSpace =
+        "pre-wrap";
+
+      resultContent.textContent =
+        "AI 면접 분석 중 문제가 발생했습니다.\n\n" +
+        error.message;
+
+      button.disabled = false;
+      button.textContent =
+        "🎤 AI에게 면접 피드백 받기";
+    }
+
+
+    result.scrollIntoView({
+      behavior:"smooth",
+      block:"nearest"
+    });
+
+  }
+);
+
+
+loadUsage();
+
+</script>
+
+</body>
+</html>
