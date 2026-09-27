@@ -105,7 +105,11 @@
 
       const tid =
         sessionStorage.getItem("kakaopay_tid");
+const partnerOrderId =
+  sessionStorage.getItem("kakaopay_order_id");
 
+const partnerUserId =
+  sessionStorage.getItem("kakaopay_user_id");
       const icon =
         document.getElementById("icon");
 
@@ -121,7 +125,12 @@
       const backButton =
         document.getElementById("backButton");
 
-      if (!pgToken || !tid) {
+      if (
+  !pgToken ||
+  !tid ||
+  !partnerOrderId ||
+  !partnerUserId
+) {
 
         icon.textContent = "⚠️";
 
@@ -150,10 +159,12 @@
             },
 
             body: JSON.stringify({
-              action: "payment_approve",
-              pg_token: pgToken,
-              tid: tid
-            })
+  action: "payment_approve",
+  pg_token: pgToken,
+  tid: tid,
+  partnerOrderId: partnerOrderId,
+  partnerUserId: partnerUserId
+})
           }
         );
 
@@ -167,9 +178,9 @@
           );
         }
 
-        sessionStorage.removeItem(
-          "kakaopay_tid"
-        );
+        sessionStorage.removeItem("kakaopay_tid");
+sessionStorage.removeItem("kakaopay_order_id");
+sessionStorage.removeItem("kakaopay_user_id");
 
         icon.textContent = "🎉";
 
