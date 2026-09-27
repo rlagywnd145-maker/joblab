@@ -1015,7 +1015,12 @@ payButton.addEventListener(
       );
 
       const data = await response.json();
-
+if (data.tid) {
+  sessionStorage.setItem(
+    "kakaopay_tid",
+    data.tid
+  );
+}
       if (!response.ok || !data.ok) {
         throw new Error(
           data.error || "결제 준비에 실패했습니다."
