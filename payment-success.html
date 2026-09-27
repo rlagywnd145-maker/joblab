@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>결제 처리 중 | 취업연구소</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      background: #f8fafc;
+      color: #111827;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: calc(100% - 40px);
+      max-width: 520px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 22px;
+      padding: 45px 30px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,.06);
+    }
+
+    .icon {
+      font-size: 48px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 25px;
+    }
+
+    p {
+      margin: 0;
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    #detail {
+      margin-top: 18px;
+      font-size: 14px;
+    }
+
+    .button {
+      display: none;
+      margin-top: 28px;
+      padding: 14px 22px;
+      border-radius: 12px;
+      background: #111827;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <div class="icon" id="icon">⏳</div>
+
+    <h1 id="title">결제를 확인하고 있습니다</h1>
+
+    <p id="message">
+      잠시만 기다려주세요.<br>
+      카카오페이 결제 승인 여부를 확인하고 있습니다.
+    </p>
+
+    <p id="detail"></p>
+
+    <a
+      href="./ai-pro.html"
+      class="button"
+      id="backButton"
+    >
+      AI Pro로 돌아가기
+    </a>
+
+  </div>
+
+  <script>
+    const WORKER_URL =
+      "https://joblab-ai.rlagywnd145.workers.dev/";
+
+    async function approvePayment() {
+
+      const params =
+        new URLSearchParams(window.location.search);
+
+      const pgToken =
+        params.get("pg_token");
+
+      const tid =
+        sessionStorage.getItem("kakaopay_tid");
+
+      const icon =
+        document.getElementById("icon");
+
+      const title =
+        document.getElementById("title");
+
+      const message =
+        document.getElementById("message");
+
+      const detail =
+        document.getElementById("detail");
+
+      const backButton =
+        document.getElementById("backButton");
+
+      if (!pgToken || !tid) {
+
+        icon.textContent = "⚠️";
+
+        title.textContent =
+          "결제 정보를 확인할 수 없습니다";
+
+        message.textContent =
+          "결제 정보를 찾지 못했습니다.";
+
+        backButton.style.display =
+          "inline-block";
+
+        return;
+      }
+
+      try {
+
+        const response = await fetch(
+          WORKER_URL,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body: JSON.stringify({
+              action: "payment_approve",
+              pg_token: pgToken,
+              tid: tid
+            })
+          }
+        );
+
+        const data =
+          await response.json();
+
+        if (!response.ok || !data.ok) {
+          throw new Error(
+            data.error ||
+            "결제 승인에 실패했습니다."
+          );
+        }
+
+        sessionStorage.removeItem(
+          "kakaopay_tid"
+        );
+
+        icon.textContent = "🎉";
+
+        title.textContent =
+          "AI Pro 결제가 완료되었습니다";
+
+        message.innerHTML =
+          "결제가 정상적으로 승인되었습니다.<br>" +
+          "AI Pro 이용권이 활성화되었습니다.";
+
+        backButton.textContent =
+          "AI Pro 시작하기";
+
+        backButton.style.display =
+          "inline-block";
+
+      } catch (error) {
+
+        console.error(error);
+
+        icon.textContent = "⚠️";
+
+        title.textContent =
+          "결제 승인에 실패했습니다";
+
+        message.textContent =
+          error.message ||
+          "결제 확인 중 오류가 발생했습니다.";
+
+        detail.textContent =
+          "결제가 실제로 완료되었다면 다시 결제하지 말고 문의해주세요.";
+
+        backButton.style.display =
+          "inline-block";
+      }
+    }
+
+    approvePayment();
+  </script>
+
+</body>
+</html>
