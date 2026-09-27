@@ -1015,10 +1015,24 @@ payButton.addEventListener(
       );
 
       const data = await response.json();
-if (data.tid) {
+if (
+  data.tid &&
+  data.partnerOrderId &&
+  data.partnerUserId
+) {
   sessionStorage.setItem(
     "kakaopay_tid",
     data.tid
+  );
+
+  sessionStorage.setItem(
+    "kakaopay_order_id",
+    data.partnerOrderId
+  );
+
+  sessionStorage.setItem(
+    "kakaopay_user_id",
+    data.partnerUserId
   );
 }
       if (!response.ok || !data.ok) {
