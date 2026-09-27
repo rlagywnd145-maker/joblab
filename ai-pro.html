@@ -701,15 +701,16 @@ function updateCounter() {
     essay.value.length.toLocaleString() + " / 5,000";
 }
 
-essay.addEventListener("input", updateCounter);
-essay.addEventListener("keyup", updateCounter);
+if (essay) {
+  essay.addEventListener("input", updateCounter);
+  essay.addEventListener("keyup", updateCounter);
 
-essay.addEventListener("paste", function () {
-  setTimeout(updateCounter, 0);
-});
+  essay.addEventListener("paste", function () {
+    setTimeout(updateCounter, 0);
+  });
 
-updateCounter();
-
+  updateCounter();
+}
 
 // ==============================
 // 3회 소진 안내
